@@ -2,7 +2,9 @@ package com.rafaeltamayo.foursoulstracker.android.tracker
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -24,6 +27,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -53,7 +60,8 @@ fun TrackerScreen() {
                     FloatingActionButton(
                         onClick = { /*TODO*/ },
                         shape = CircleShape,
-                        containerColor = Color.Red
+                        containerColor = Color.Red,
+                        modifier = Modifier.padding(8.dp)
                     ) {
                         Icon(imageVector = Icons.Default.Refresh, contentDescription = "Reset character")
                     }
@@ -65,26 +73,66 @@ fun TrackerScreen() {
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier.size(200.dp)
                 )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.revive_icon),
+                            contentDescription = null,
+                            modifier = Modifier.size(50.dp),
+                            tint = Color.Unspecified
+                        )
+                    }
+                    Spacer(modifier = Modifier.width(18.dp))
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.kill_icon),
+                            contentDescription = null,
+                            modifier = Modifier.size(50.dp),
+                            tint = Color.Unspecified
+                        )
+                    }
+                }
                 StatController(
                     icon = R.drawable.ic_action_heart,
                     text = "HP",
-                    value = 2
+                    value = 2,
+                    onStatUp = {},
+                    onStatDown = {}
                 )
                 StatController(
                     icon = R.drawable.ic_action_sword,
                     text = "DMG",
-                    value = 1
+                    value = 1,
+                    onStatUp = {},
+                    onStatDown = {}
                 )
                 StatController(
                     icon = R.drawable.ic_action_dice,
                     text = "DICE",
-                    value = 1
+                    value = 1,
+                    onStatUp = {},
+                    onStatDown = {}
                 )
                 StatController(
                     icon = R.drawable.ic_action_soul,
                     text = "SOULS",
-                    value = 0
+                    value = 0,
+                    onStatUp = {},
+                    onStatDown = {}
                 )
+                Text(
+                    text = "Counters",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.Yellow)
+                )
+                LazyColumn {
+
+                }
             }
         }
     }
@@ -94,7 +142,9 @@ fun TrackerScreen() {
 fun StatController(
     @DrawableRes icon:  Int,
     text: String,
-    value: Int
+    value: Int,
+    onStatUp: () -> Unit,
+    onStatDown: () -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -114,9 +164,7 @@ fun StatController(
             style = MaterialTheme.typography.displayMedium
         )
         Spacer(modifier = Modifier.weight(1F))
-        IconButton(
-            onClick = { /*TODO*/ }
-        ) {
+        IconButton(onClick = onStatUp) {
             Icon(
                 imageVector = Icons.Default.Add,
                 contentDescription = null,
@@ -127,7 +175,7 @@ fun StatController(
             text = "$value",
             style = MaterialTheme.typography.displayMedium
         )
-        IconButton(onClick = { /*TODO*/ }) {
+        IconButton(onClick = onStatDown) {
             Icon(
                 imageVector = Icons.Default.ArrowDropDown,
                 contentDescription = null,
@@ -146,9 +194,16 @@ fun TrackerScreenPreview() {
 @Composable
 @Preview
 fun StatControllerPreview() {
+    var statValue by remember { mutableIntStateOf(2) }
     StatController(
         R.drawable.ic_action_heart,
         "HP",
-        2
+        statValue,
+        onStatUp = {
+            statValue = statValue.plus(1)
+        },
+        onStatDown = {
+            statValue = statValue.minus(1)
+        }
     )
 }

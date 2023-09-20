@@ -1,0 +1,34 @@
+import kotlin.Boolean;
+
+CREATE TABLE saves(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    is_alive INTEGER AS Boolean,
+    hp INTEGER NOT NULL,
+    damage INTEGER NOT NULL,
+    dice_modifier INTEGER NOT NULL,
+    souls INTEGER NOT NULL
+);
+
+CREATE TABLE counters(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    save_id INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    value INTEGER NOT NULL
+);
+
+insertSave:
+INSERT OR REPLACE
+INTO saves(id, name, is_alive, hp, damage, dice_modifier, souls)
+VALUES(?,?, ?, ?, ?, ?, ?);
+
+getSaves:
+SELECT * FROM saves;
+
+insertCounter:
+INSERT OR REPLACE
+INTO counters(id, save_id, name, value)
+VALUES(?,?, ?, ?);
+
+getCounters:
+SELECT * FROM counters;
