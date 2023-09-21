@@ -10,6 +10,7 @@ plugins {
 buildscript {
     dependencies {
         classpath("com.squareup.sqldelight:gradle-plugin:1.5.5")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:2.46.1")
     }
 }
 

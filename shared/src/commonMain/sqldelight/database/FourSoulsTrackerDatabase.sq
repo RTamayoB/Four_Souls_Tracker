@@ -25,10 +25,19 @@ VALUES(?,?, ?, ?, ?, ?, ?);
 getSaves:
 SELECT * FROM saves;
 
+getSaveById:
+SELECT * FROM saves WHERE id = :id;
+
 insertCounter:
 INSERT OR REPLACE
 INTO counters(id, save_id, name, value)
 VALUES(?,?, ?, ?);
 
+deleteCounterById:
+DELETE FROM counters WHERE id = :id;
+
 getCounters:
 SELECT * FROM counters;
+
+getCountersBySaveId:
+SELECT * FROM counters WHERE save_id = :save_id;
