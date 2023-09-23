@@ -12,6 +12,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -63,10 +64,16 @@ fun SavesScreen(
 fun SaveListItem(uiSave: UiSave) {
     ListItem(
         headlineContent = {
-            Text(text = "${uiSave.name} - ID:${uiSave.id}")
+            Text(
+                text = "${uiSave.name} - ID:${uiSave.id}",
+                style = MaterialTheme.typography.titleLarge
+            )
         },
         supportingContent = {
-            Text(text = "HP:${uiSave.hp} - DMG:${uiSave.damage} - DICE:${uiSave.dice} - SOULS:${uiSave.souls}")
+            Text(
+                text = "HP:${uiSave.hp} - DMG:${uiSave.damage} - DICE:${uiSave.dice} - SOULS:${uiSave.souls}",
+                style = MaterialTheme.typography.bodyMedium
+            )
         }
     )
 }

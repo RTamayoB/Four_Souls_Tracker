@@ -39,9 +39,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rafaeltamayo.foursoulstracker.android.R
+import com.rafaeltamayo.foursoulstracker.tracker.presentation.TrackerEvent
+import com.rafaeltamayo.foursoulstracker.tracker.presentation.TrackerState
 
 @Composable
-fun TrackerScreen() {
+fun TrackerScreen(
+    state: TrackerState,
+    onEvent: (TrackerEvent) -> Unit
+) {
     Scaffold { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {
             Image(
@@ -188,7 +193,10 @@ fun StatController(
 @Composable
 @Preview
 fun TrackerScreenPreview() {
-    TrackerScreen()
+    TrackerScreen(
+        state = TrackerState(),
+        onEvent = {}
+    )
 }
 
 @Composable
