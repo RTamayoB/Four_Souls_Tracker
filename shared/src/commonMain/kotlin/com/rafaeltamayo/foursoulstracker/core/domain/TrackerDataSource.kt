@@ -10,10 +10,15 @@ interface TrackerDataSource {
 
     fun getSaveById(id: Long): CommonFlow<SaveItem?>
 
-    suspend fun insertSave(save: SaveItem)
+    suspend fun insertOrReplaceSave(save: SaveItem)
 
-    fun getCounters(): CommonFlow<List<CounterItem>>
+    suspend fun updateSave(save: SaveItem)
 
-    suspend fun insertCounter(counter: CounterItem)
-    suspend fun updateCounter(counter: CounterItem)
+    suspend fun deleteSave(saveId: Long)
+
+    fun getCountersBySaveId(saveId: Long): CommonFlow<CounterItem?>
+
+    suspend fun insertOrReplaceCounter(counter: CounterItem)
+
+    suspend fun deleteCounter(counterId: Long)
 }

@@ -6,13 +6,17 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.rafaeltamayo.foursoulstracker.android.tracker.TrackerScreen
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.rafaeltamayo.foursoulstracker.android.saves.AndroidSavesViewModel
+import com.rafaeltamayo.foursoulstracker.android.saves.SavesScreen
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -24,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    TrackerScreen()
+                    MainNavHost()
                 }
             }
         }
@@ -32,14 +36,22 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun GreetingView(text: String) {
-    Text(text = text)
-}
+fun MainNavHost() {
+    val navController = rememberNavController()
+    NavHost(
+        navController = navController,
+        startDestination = "trackerSaves"
+    ) {
+        composable("trackerSaves") {
+            val viewModel = hiltViewModel<AndroidSavesViewModel>()
+            val state by viewModel.state.collectAsState()
 
-@Preview
-@Composable
-fun DefaultPreview() {
-    MyApplicationTheme {
-        GreetingView("Hello, Android!")
+            SavesScreen(
+                state = state,
+                onEvent = {
+                    viewModel.onEvent(it)
+                }
+            )
+        }
     }
 }

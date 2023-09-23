@@ -3,13 +3,13 @@ package com.rafaeltamayo.foursoulstracker.core.domain.models
 import database.Saves
 
 data class SaveItem(
-    val id: Long,
+    val id: Long?,
     val name: String,
-    val isAlive: Boolean? = true,
-    val hp: Int = 2,
-    val damage: Int = 1,
-    val dice: Int = 0,
-    val souls: Int = 0
+    val isAlive: Boolean,
+    val hp: Int,
+    val damage: Int,
+    val dice: Int,
+    val souls: Int
 )
 
 
@@ -17,7 +17,7 @@ fun Saves.toSaveItem(): SaveItem {
     return SaveItem(
         id = id,
         name = name,
-        isAlive = is_alive,
+        isAlive = is_alive ?: false,
         hp = hp.toInt(),
         dice = dice_modifier.toInt(),
         damage = damage.toInt(),

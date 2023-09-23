@@ -1,4 +1,5 @@
 package com.rafaeltamayo.foursoulstracker.core.presentation.models
 
-class UiCounter {
-}
+data class UiCounter(
+    val id: Long,
+)

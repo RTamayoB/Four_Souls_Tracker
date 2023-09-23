@@ -22,11 +22,19 @@ INSERT OR REPLACE
 INTO saves(id, name, is_alive, hp, damage, dice_modifier, souls)
 VALUES(?,?, ?, ?, ?, ?, ?);
 
+updateSave:
+UPDATE saves
+SET name = :name, is_alive = :isAlive, hp = :hp, damage = :damage, dice_modifier = :dice, souls = :souls
+WHERE id = :id;
+
 getSaves:
 SELECT * FROM saves;
 
 getSaveById:
 SELECT * FROM saves WHERE id = :id;
+
+deleteSave:
+DELETE FROM saves WHERE id = :id;
 
 insertCounter:
 INSERT OR REPLACE

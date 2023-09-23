@@ -2,6 +2,7 @@ package com.rafaeltamayo.foursoulstracker.core.data.repositories
 
 import com.rafaeltamayo.foursoulstracker.core.domain.util.CommonFlow
 import com.rafaeltamayo.foursoulstracker.core.domain.TrackerDataSource
+import com.rafaeltamayo.foursoulstracker.core.domain.models.CounterItem
 import com.rafaeltamayo.foursoulstracker.core.domain.models.SaveItem
 
 class TrackerRepository(
@@ -12,31 +13,31 @@ class TrackerRepository(
         return dataSource.getSaves()
     }
 
-    fun getSaveById() {
-
+    fun getSaveById(saveId: Long): CommonFlow<SaveItem?> {
+        return dataSource.getSaveById(saveId)
     }
 
-    fun insertSave(saveItem: SaveItem) {
-
+    suspend fun insertOrReplaceSave(saveItem: SaveItem) {
+        return dataSource.insertOrReplaceSave(saveItem)
     }
 
-    fun updateSave(saveItem: SaveItem) {
-
+    suspend fun updateSave(saveItem: SaveItem) {
+        return dataSource.updateSave(saveItem)
     }
 
-    fun deleteSave(saveId: Long) {
-
+    suspend fun deleteSave(saveId: Long) {
+        return dataSource.deleteSave(saveId)
     }
 
-    fun getCountersBySaveId() {
-
+    fun getCountersBySaveId(saveId: Long): CommonFlow<CounterItem?> {
+        return dataSource.getCountersBySaveId(saveId)
     }
 
-    suspend fun insertCounter(saveItem: SaveItem) {
-        dataSource.insertSave(saveItem)
+    suspend fun insertOrReplaceCounter(counterItem: CounterItem) {
+        return dataSource.insertOrReplaceCounter(counterItem)
     }
 
-    suspend fun deleteCounter() {
-
+    suspend fun deleteCounter(counterId: Long) {
+        return dataSource.deleteCounter(counterId)
     }
 }
