@@ -2,7 +2,7 @@ package com.rafaeltamayo.foursoulstracker.android.tracker.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rafaeltamayo.foursoulstracker.tracker.data.TrackerRepository
+import com.rafaeltamayo.foursoulstracker.core.data.repositories.TrackerRepository
 import com.rafaeltamayo.foursoulstracker.tracker.presentation.TrackerEvent
 import com.rafaeltamayo.foursoulstracker.tracker.presentation.TrackerViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,24 +1,17 @@
-package com.rafaeltamayo.foursoulstracker.tracker.data.local
+package com.rafaeltamayo.foursoulstracker.core.data.local
 
 import com.rafaeltamayo.foursoulstracker.core.domain.util.CommonFlow
 import com.rafaeltamayo.foursoulstracker.core.domain.util.toCommonFlow
 import com.rafaeltamayo.foursoulstracker.database.FourSoulsTrackerDatabase
-import com.rafaeltamayo.foursoulstracker.tracker.domain.TrackerDataSource
-import com.rafaeltamayo.foursoulstracker.tracker.domain.models.CounterItem
-import com.rafaeltamayo.foursoulstracker.tracker.domain.models.SaveItem
-import com.rafaeltamayo.foursoulstracker.tracker.domain.models.toSaveItem
-import com.rafaeltamayo.foursoulstracker.tracker.domain.models.toSaveItems
+import com.rafaeltamayo.foursoulstracker.core.domain.TrackerDataSource
+import com.rafaeltamayo.foursoulstracker.core.domain.models.CounterItem
+import com.rafaeltamayo.foursoulstracker.core.domain.models.SaveItem
+import com.rafaeltamayo.foursoulstracker.core.domain.models.toSaveItem
+import com.rafaeltamayo.foursoulstracker.core.domain.models.toSaveItems
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
-import database.Saves
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
 
 class SqlDelightTrackerDataSource(
     db: FourSoulsTrackerDatabase

@@ -1,8 +1,6 @@
-package com.rafaeltamayo.foursoulstracker.tracker.domain.models
+package com.rafaeltamayo.foursoulstracker.core.domain.models
 
 import database.Saves
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 
 data class SaveItem(
     val id: Long,

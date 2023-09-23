@@ -1,8 +1,8 @@
-package com.rafaeltamayo.foursoulstracker.tracker.domain
+package com.rafaeltamayo.foursoulstracker.core.domain
 
 import com.rafaeltamayo.foursoulstracker.core.domain.util.CommonFlow
-import com.rafaeltamayo.foursoulstracker.tracker.domain.models.CounterItem
-import com.rafaeltamayo.foursoulstracker.tracker.domain.models.SaveItem
+import com.rafaeltamayo.foursoulstracker.core.domain.models.CounterItem
+import com.rafaeltamayo.foursoulstracker.core.domain.models.SaveItem
 
 interface TrackerDataSource {
 

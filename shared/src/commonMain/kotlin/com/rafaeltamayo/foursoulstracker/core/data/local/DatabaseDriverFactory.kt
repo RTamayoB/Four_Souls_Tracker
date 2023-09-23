@@ -1,4 +1,4 @@
-package com.rafaeltamayo.foursoulstracker.tracker.data.local
+package com.rafaeltamayo.foursoulstracker.core.data.local
 
 import com.squareup.sqldelight.db.SqlDriver
 

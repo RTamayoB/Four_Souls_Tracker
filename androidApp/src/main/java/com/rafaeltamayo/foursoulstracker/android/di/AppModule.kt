@@ -2,10 +2,10 @@ package com.rafaeltamayo.foursoulstracker.android.di
 
 import android.app.Application
 import com.rafaeltamayo.foursoulstracker.database.FourSoulsTrackerDatabase
-import com.rafaeltamayo.foursoulstracker.tracker.data.TrackerRepository
-import com.rafaeltamayo.foursoulstracker.tracker.data.local.DatabaseDriverFactory
-import com.rafaeltamayo.foursoulstracker.tracker.data.local.SqlDelightTrackerDataSource
-import com.rafaeltamayo.foursoulstracker.tracker.domain.TrackerDataSource
+import com.rafaeltamayo.foursoulstracker.core.data.repositories.TrackerRepository
+import com.rafaeltamayo.foursoulstracker.core.data.local.DatabaseDriverFactory
+import com.rafaeltamayo.foursoulstracker.core.data.local.SqlDelightTrackerDataSource
+import com.rafaeltamayo.foursoulstracker.core.domain.TrackerDataSource
 import com.squareup.sqldelight.db.SqlDriver
 import dagger.Module
 import dagger.Provides
