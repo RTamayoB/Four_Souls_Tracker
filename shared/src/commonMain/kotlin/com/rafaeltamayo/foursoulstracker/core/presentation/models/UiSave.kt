@@ -1,6 +1,6 @@
 package com.rafaeltamayo.foursoulstracker.core.presentation.models
 
-import com.rafaeltamayo.foursoulstracker.core.domain.models.SaveItem
+import com.rafaeltamayo.foursoulstracker.core.domain.models.SaveEntity
 
 data class UiSave(
      val id: Long? = 0,
@@ -12,7 +12,7 @@ data class UiSave(
     val souls: Int = 0
 )
 
-fun SaveItem.toUISave(): UiSave {
+fun SaveEntity.toUISave(): UiSave {
     return UiSave(
         id = id,
         name = name,
@@ -24,12 +24,12 @@ fun SaveItem.toUISave(): UiSave {
     )
 }
 
-fun List<SaveItem>.toUISaves(): List<UiSave> {
+fun List<SaveEntity>.toUISaves(): List<UiSave> {
     return map { it.toUISave() }
 }
 
-fun UiSave.toSaveItem(): SaveItem {
-    return SaveItem(
+fun UiSave.toSaveEntity(): SaveEntity {
+    return SaveEntity(
         id = id,
         name = name,
         isAlive = isAlive ?: false,

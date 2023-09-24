@@ -16,7 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.rafaeltamayo.foursoulstracker.android.core.ui.theme.MyApplicationTheme
+import com.rafaeltamayo.foursoulstracker.android.core.ui.theme.FourSoulsTrackerTheme
 import com.rafaeltamayo.foursoulstracker.android.saves.AndroidSavesViewModel
 import com.rafaeltamayo.foursoulstracker.android.saves.SavesScreen
 import com.rafaeltamayo.foursoulstracker.android.tracker.TrackerScreen
@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyApplicationTheme {
+            FourSoulsTrackerTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -55,6 +55,12 @@ fun MainNavHost() {
                 state = state,
                 onEvent = {
                     viewModel.onEvent(it)
+                },
+                onNavigateToSave = {
+                    navController.navigate("tracker/$it")
+                },
+                onNavigateToNewSave = {
+                    navController.navigate("tracker/new")
                 }
             )
         }

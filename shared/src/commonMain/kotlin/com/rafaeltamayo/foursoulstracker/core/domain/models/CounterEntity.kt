@@ -2,7 +2,7 @@ package com.rafaeltamayo.foursoulstracker.core.domain.models
 
 import database.Counters
 
-data class CounterItem(
+data class CounterEntity(
     val id: Long,
     val saveId: Long,
     val name: String,
@@ -10,8 +10,8 @@ data class CounterItem(
 )
 
 
-fun Counters.toCounterItem(): CounterItem {
-    return CounterItem(
+fun Counters.toCounterEntity(): CounterEntity {
+    return CounterEntity(
         id = id,
         saveId = save_id,
         name = name,
@@ -19,6 +19,6 @@ fun Counters.toCounterItem(): CounterItem {
     )
 }
 
-fun List<Counters>.toCounterItems(): List<CounterItem> {
-    return map { it.toCounterItem() }
+fun List<Counters>.toCounterEntities(): List<CounterEntity> {
+    return map { it.toCounterEntity() }
 }

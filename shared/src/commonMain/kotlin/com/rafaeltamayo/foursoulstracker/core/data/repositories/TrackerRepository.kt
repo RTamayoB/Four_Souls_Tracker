@@ -2,39 +2,39 @@ package com.rafaeltamayo.foursoulstracker.core.data.repositories
 
 import com.rafaeltamayo.foursoulstracker.core.domain.util.CommonFlow
 import com.rafaeltamayo.foursoulstracker.core.domain.TrackerDataSource
-import com.rafaeltamayo.foursoulstracker.core.domain.models.CounterItem
-import com.rafaeltamayo.foursoulstracker.core.domain.models.SaveItem
+import com.rafaeltamayo.foursoulstracker.core.domain.models.CounterEntity
+import com.rafaeltamayo.foursoulstracker.core.domain.models.SaveEntity
 
 class TrackerRepository(
     private val dataSource: TrackerDataSource
 ) {
 
-    fun getSaves(): CommonFlow<List<SaveItem>> {
+    fun getSaves(): CommonFlow<List<SaveEntity>> {
         return dataSource.getSaves()
     }
 
-    fun getSaveById(saveId: Long): CommonFlow<SaveItem?> {
+    fun getSaveById(saveId: Long): CommonFlow<SaveEntity?> {
         return dataSource.getSaveById(saveId)
     }
 
-    suspend fun insertOrReplaceSave(saveItem: SaveItem) {
-        return dataSource.insertOrReplaceSave(saveItem)
+    suspend fun insertOrReplaceSave(saveEntity: SaveEntity) {
+        return dataSource.insertOrReplaceSave(saveEntity)
     }
 
-    suspend fun updateSave(saveItem: SaveItem) {
-        return dataSource.updateSave(saveItem)
+    suspend fun updateSave(saveEntity: SaveEntity) {
+        return dataSource.updateSave(saveEntity)
     }
 
     suspend fun deleteSave(saveId: Long) {
         return dataSource.deleteSave(saveId)
     }
 
-    fun getCountersBySaveId(saveId: Long): CommonFlow<CounterItem?> {
+    fun getCountersBySaveId(saveId: Long): CommonFlow<CounterEntity?> {
         return dataSource.getCountersBySaveId(saveId)
     }
 
-    suspend fun insertOrReplaceCounter(counterItem: CounterItem) {
-        return dataSource.insertOrReplaceCounter(counterItem)
+    suspend fun insertOrReplaceCounter(counterEntity: CounterEntity) {
+        return dataSource.insertOrReplaceCounter(counterEntity)
     }
 
     suspend fun deleteCounter(counterId: Long) {

@@ -4,11 +4,11 @@ import com.rafaeltamayo.foursoulstracker.core.domain.util.CommonFlow
 import com.rafaeltamayo.foursoulstracker.core.domain.util.toCommonFlow
 import com.rafaeltamayo.foursoulstracker.database.FourSoulsTrackerDatabase
 import com.rafaeltamayo.foursoulstracker.core.domain.TrackerDataSource
-import com.rafaeltamayo.foursoulstracker.core.domain.models.CounterItem
-import com.rafaeltamayo.foursoulstracker.core.domain.models.SaveItem
-import com.rafaeltamayo.foursoulstracker.core.domain.models.toCounterItem
-import com.rafaeltamayo.foursoulstracker.core.domain.models.toSaveItem
-import com.rafaeltamayo.foursoulstracker.core.domain.models.toSaveItems
+import com.rafaeltamayo.foursoulstracker.core.domain.models.CounterEntity
+import com.rafaeltamayo.foursoulstracker.core.domain.models.SaveEntity
+import com.rafaeltamayo.foursoulstracker.core.domain.models.toCounterEntity
+import com.rafaeltamayo.foursoulstracker.core.domain.models.toSaveEntity
+import com.rafaeltamayo.foursoulstracker.core.domain.models.toSaveEntities
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
 import kotlinx.coroutines.flow.flowOf
@@ -19,22 +19,22 @@ class SqlDelightTrackerDataSource(
 ): TrackerDataSource {
 
     private val queries = db.fourSoulsTrackerDatabaseQueries
-    override fun getSaves(): CommonFlow<List<SaveItem>> {
+    override fun getSaves(): CommonFlow<List<SaveEntity>> {
         return queries
             .getSaves()
             .asFlow()
             .mapToList()
             .map { saves ->
-                saves.toSaveItems()
+                saves.toSaveEntities()
             }
             .toCommonFlow()
     }
 
-    override fun getSaveById(id: Long): CommonFlow<SaveItem?> {
-        return flowOf(queries.getSaveById(id).executeAsOneOrNull()?.toSaveItem()).toCommonFlow()
+    override fun getSaveById(id: Long): CommonFlow<SaveEntity?> {
+        return flowOf(queries.getSaveById(id).executeAsOneOrNull()?.toSaveEntity()).toCommonFlow()
     }
 
-    override suspend fun insertOrReplaceSave(save: SaveItem) {
+    override suspend fun insertOrReplaceSave(save: SaveEntity) {
         queries.insertSave(
             id = null,
             name = save.name,
@@ -46,7 +46,7 @@ class SqlDelightTrackerDataSource(
         )
     }
 
-    override suspend fun updateSave(save: SaveItem) {
+    override suspend fun updateSave(save: SaveEntity) {
         save.id?.let {
             queries.updateSave(
                 name = save.name,
@@ -64,17 +64,17 @@ class SqlDelightTrackerDataSource(
         queries.deleteSave(saveId)
     }
 
-    override fun getCountersBySaveId(saveId:Long): CommonFlow<CounterItem?> {
+    override fun getCountersBySaveId(saveId:Long): CommonFlow<CounterEntity?> {
         return queries
             .getCountersBySaveId(saveId)
             .asFlow()
             .map {
-                it.executeAsOneOrNull()?.toCounterItem()
+                it.executeAsOneOrNull()?.toCounterEntity()
             }
             .toCommonFlow()
     }
 
-    override suspend fun insertOrReplaceCounter(counter: CounterItem) {
+    override suspend fun insertOrReplaceCounter(counter: CounterEntity) {
         queries.insertCounter(
             id = counter.id,
             save_id = counter.saveId,

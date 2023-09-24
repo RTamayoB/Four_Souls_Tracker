@@ -2,7 +2,7 @@ package com.rafaeltamayo.foursoulstracker.core.domain.models
 
 import database.Saves
 
-data class SaveItem(
+data class SaveEntity(
     val id: Long?,
     val name: String,
     val isAlive: Boolean,
@@ -13,8 +13,8 @@ data class SaveItem(
 )
 
 
-fun Saves.toSaveItem(): SaveItem {
-    return SaveItem(
+fun Saves.toSaveEntity(): SaveEntity {
+    return SaveEntity(
         id = id,
         name = name,
         isAlive = is_alive ?: false,
@@ -25,6 +25,6 @@ fun Saves.toSaveItem(): SaveItem {
     )
 }
 
-fun List<Saves>.toSaveItems(): List<SaveItem> {
-    return map { it.toSaveItem() }
+fun List<Saves>.toSaveEntities(): List<SaveEntity> {
+    return map { it.toSaveEntity() }
 }

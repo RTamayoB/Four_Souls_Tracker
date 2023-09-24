@@ -1,24 +1,24 @@
 package com.rafaeltamayo.foursoulstracker.core.domain
 
 import com.rafaeltamayo.foursoulstracker.core.domain.util.CommonFlow
-import com.rafaeltamayo.foursoulstracker.core.domain.models.CounterItem
-import com.rafaeltamayo.foursoulstracker.core.domain.models.SaveItem
+import com.rafaeltamayo.foursoulstracker.core.domain.models.CounterEntity
+import com.rafaeltamayo.foursoulstracker.core.domain.models.SaveEntity
 
 interface TrackerDataSource {
 
-    fun getSaves(): CommonFlow<List<SaveItem>>
+    fun getSaves(): CommonFlow<List<SaveEntity>>
 
-    fun getSaveById(id: Long): CommonFlow<SaveItem?>
+    fun getSaveById(id: Long): CommonFlow<SaveEntity?>
 
-    suspend fun insertOrReplaceSave(save: SaveItem)
+    suspend fun insertOrReplaceSave(save: SaveEntity)
 
-    suspend fun updateSave(save: SaveItem)
+    suspend fun updateSave(save: SaveEntity)
 
     suspend fun deleteSave(saveId: Long)
 
-    fun getCountersBySaveId(saveId: Long): CommonFlow<CounterItem?>
+    fun getCountersBySaveId(saveId: Long): CommonFlow<CounterEntity?>
 
-    suspend fun insertOrReplaceCounter(counter: CounterItem)
+    suspend fun insertOrReplaceCounter(counter: CounterEntity)
 
     suspend fun deleteCounter(counterId: Long)
 }

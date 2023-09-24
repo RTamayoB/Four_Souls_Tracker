@@ -2,7 +2,7 @@ package com.rafaeltamayo.foursoulstracker.saves.presentation
 
 import com.rafaeltamayo.foursoulstracker.core.data.repositories.TrackerRepository
 import com.rafaeltamayo.foursoulstracker.core.presentation.models.UiSave
-import com.rafaeltamayo.foursoulstracker.core.presentation.models.toSaveItem
+import com.rafaeltamayo.foursoulstracker.core.presentation.models.toSaveEntity
 import com.rafaeltamayo.foursoulstracker.core.presentation.models.toUISaves
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,7 +39,7 @@ class SavesViewModel(
                     name = "Test Save",
                 )
                 viewModelScope.launch {
-                    trackerRepository.insertOrReplaceSave(uiSave.toSaveItem())
+                    trackerRepository.insertOrReplaceSave(uiSave.toSaveEntity())
                 }
             }
 
@@ -49,7 +49,26 @@ class SavesViewModel(
                     name = "Save Updated"
                 )
                 viewModelScope.launch {
-                    trackerRepository.updateSave(updatedSave.toSaveItem())
+                    trackerRepository.updateSave(updatedSave.toSaveEntity())
+                }
+            }
+
+            is SavesEvent.DeselectSave -> {
+                val selectedSaves = _state.value.selectedSaves.toMutableList()
+                selectedSaves.remove(event.save)
+                _state.update {
+                    it.copy(
+                        selectedSaves = selectedSaves
+                    )
+                }
+            }
+            is SavesEvent.SelectSave -> {
+                val selectedSaves = _state.value.selectedSaves.toMutableList()
+                selectedSaves.add(event.save)
+                _state.update {
+                    it.copy(
+                        selectedSaves = selectedSaves
+                    )
                 }
             }
         }

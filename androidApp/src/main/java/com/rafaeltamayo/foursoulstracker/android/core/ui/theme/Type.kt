@@ -23,5 +23,10 @@ val typography = Typography(
         fontFamily = FourSoulsFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 22.sp
+    ),
+    displayLarge = TextStyle(
+        fontFamily = FourSoulsFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 57.sp
     )
 )
